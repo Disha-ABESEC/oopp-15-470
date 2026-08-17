@@ -1,67 +1,69 @@
-#include<iostream>
+#include <iostream>
+#include <string>
 using namespace std;
 
-class Bank
+class BankAccount
 {
 private:
-    int accno;
     string name;
     float balance;
 
 public:
-    void input()
+    // Default Constructor
+    BankAccount()
     {
-        cout << "Enter Account Number: ";
-        cin >> accno;
-
-        cout << "Enter Name: ";
-        cin >> name;
-
-        cout << "Enter Balance: ";
-        cin >> balance;
+        name = "Unknown";
+        balance = 0;
+        cout << "Default Constructor Called" << endl;
     }
 
-    void deposit()
+    // Parameterized Constructor
+    BankAccount(string n, float b)
     {
-        float amt;
-        cout << "Enter amount to deposit: ";
-        cin >> amt;
-
-        balance = balance + amt;
+        name = n;
+        balance = b;
+        cout << "Parameterized Constructor Called" << endl;
     }
 
-    void withdraw()
+    // Copy Constructor
+    BankAccount(const BankAccount &a)
     {
-        float amt;
-        cout << "Enter amount to withdraw: ";
-        cin >> amt;
-
-        if(amt <= balance)
-        {
-            balance = balance - amt;
-        }
-        else
-        {
-            cout << "Insufficient Balance" << endl;
-        }
+        name = a.name;
+        balance = a.balance;
+        cout << "Copy Constructor Called" << endl;
     }
 
+    // Display Function
     void display()
     {
-        cout << "\nAccount Number: " << accno << endl;
         cout << "Name: " << name << endl;
         cout << "Balance: " << balance << endl;
+    }
+
+    // Destructor
+    ~BankAccount()
+    {
+        cout << "Destructor Called for " << name << endl;
     }
 };
 
 int main()
 {
-    Bank b;
+    // Default Constructor
+    BankAccount account1;
+    account1.display();
 
-    b.input();
-    b.deposit();
-    b.withdraw();
-    b.display();
+    cout << endl;
+
+    // Parameterized Constructor
+    BankAccount account2("Lucky", 5000);
+    account2.display();
+
+    cout << endl;
+
+    // Copy Constructor
+    BankAccount account3(account2);
+    account3.display();
 
     return 0;
 }
